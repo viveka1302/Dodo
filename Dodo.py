@@ -1,9 +1,9 @@
-from typing import Text
 import pyttsx3 as px
 import datetime
 import speech_recognition as sr
 import tkinter as tk
 import wikipedia as wk
+import webbrowser as wb
 
 engine= px.init()
 voice=engine.getProperty('voices')
@@ -47,9 +47,11 @@ def OnClick():
         time()
     if "date" in x:
         date()
+    elif "open" in x:
+        q=x.replace("open",'').lower()
+        wb.open(q+".com")
     elif "quit" or "offline" in x:
         quit(0)
-    
     elif "wikipedia" or "wiki" or "look up" or "search":
         q=x.replace("wikipedia" or "wiki" or "look up" or "search", " ")
         try:
