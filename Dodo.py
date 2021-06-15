@@ -50,9 +50,7 @@ def OnClick():
     elif "open" in x:
         q=x.replace("open",'').lower()
         wb.open(q+".com")
-    elif "quit" or "offline" in x:
-        quit(0)
-    elif "wikipedia" or "wiki" or "look up" or "search":
+    elif ("wikipedia" or "wiki" or "look up" or "search") in x:
         q=x.replace("wikipedia" or "wiki" or "look up" or "search", " ")
         try:
             result=str(wk.summary(q, sentences=2))
@@ -64,7 +62,17 @@ def OnClick():
             print(e)
             reply.config(text='Whoops! No matching results found')
             pronounce("No results found")
-    
+    elif "do you remember" in x:
+        pronounce("This is what you asked me to remember that")
+        remem=open("remem.txt", "r")
+        pronounce(remem.read())
+    elif "remember" in x:
+        pronounce("What should I remember?")
+        q=str(get_command()).lower()
+        remember=open("remem.txt", "w")
+        remember.write(q)
+        pronounce("I shall remember that {}".format(q))
+        remember.close()
     
 window=tk.Tk()
 window.title('Dodo: The smart voice assistant')
@@ -77,4 +85,3 @@ reply=tk.Label(window, text='')
 reply.pack()
 pronounce("Hello. This is dodo. How may I help you?")
 window.mainloop()
-    
