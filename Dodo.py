@@ -4,6 +4,8 @@ import speech_recognition as sr
 import tkinter as tk
 import wikipedia as wk
 import webbrowser as wb
+import pyautogui as pag
+import pyjokes as pj
 
 engine= px.init()
 voice=engine.getProperty('voices')
@@ -40,6 +42,11 @@ def get_command():
         pronounce("Say that again please...")
         return None
     return query
+def screenshot():
+    img=pag.screenshot(imageFilename=r"E:\DodoSS.png")
+def jokes():
+    pronounce(pj.get_joke())
+
 def OnClick():
     x=str(get_command()).lower()
     inp.config(text=x)
@@ -73,6 +80,12 @@ def OnClick():
         remember.write(q)
         pronounce("I shall remember that {}".format(q))
         remember.close()
+    elif "screenshot" in x:
+        screenshot()
+        pronounce("Done!")
+    elif "joke" in x:
+        jokes()
+
     
 window=tk.Tk()
 window.title('Dodo: The smart voice assistant')
